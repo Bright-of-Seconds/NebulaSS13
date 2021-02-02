@@ -1,0 +1,6 @@
+[submodule "mods/bright_of_seconds"]
+	path = mods/bright_of_seconds
+	url = ../Bright-Of-Seconds
+[submodule "maps/Octaura"]
+	path = maps/Octaura
+	url = ../Octaura
