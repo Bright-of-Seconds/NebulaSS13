@@ -1,0 +1,38 @@
+name: Merge
+
+on:
+  workflow_dispatch:
+    inputs:
+      Upstream:
+        description: 'Upstream to pull'
+        required: true
+        default: 'NebulaSS13/Nebula'
+      Branch:
+        description: 'Branch of upstream to pull'
+        required: true
+        default: dev
+
+jobs:
+  Merge:
+    runs-on: ubuntu-latest
+    if: github.repository != ${{ github.event.inputs.Upstream }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 25
+      - name: Fetching
+        run: |
+          git remote add upstream https://github.com/${{ github.event.inputs.Upstream }}
+          git fetch --all
+      - name: Merge
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Upstream Merger"
+          git merge upstream/${{ github.event.inputs.Branch }}
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.inputs.Branch }}
+
