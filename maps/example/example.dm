@@ -1,5 +1,8 @@
 #if !defined(USING_MAP_DATUM)
 
+	//for testing
+	#include "../../mods/bright_of_seconds/bright_of_seconds.dme"
+
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"
 	#include "example_unit_testing.dm"
